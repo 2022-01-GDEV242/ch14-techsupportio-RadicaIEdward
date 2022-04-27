@@ -125,9 +125,28 @@ public class Responder
         Path path = Paths.get(FILE_OF_DEFAULT_RESPONSES);
         try (BufferedReader reader = Files.newBufferedReader(path, charset)) {
             String response = reader.readLine();
-            while(response != null) {
-                defaultResponses.add(response);
-                response = reader.readLine();
+            String lines = "";
+            while(response != null) 
+            {
+                if(!response.isEmpty())
+                {
+                    lines += response;
+                    response = reader.readLine();
+                }
+                else if(response.isEmpty() && lines.isEmpty())
+                {
+                    response = reader.readLine();
+                }
+                else
+                {
+                    defaultResponses.add(lines);
+                    lines = "";
+                    response = reader.readLine();
+                }
+            }
+            if(!lines.isEmpty())
+            {
+                defaultResponses.add(lines);
             }
         }
         catch(FileNotFoundException e) {
@@ -143,7 +162,7 @@ public class Responder
         }
     }
 
-    /**
+    /** 
      * Randomly select and return one of the default responses.
      * @return     A random default response
      */
