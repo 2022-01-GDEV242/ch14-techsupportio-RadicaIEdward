@@ -14,8 +14,8 @@ import java.util.*;
  * in the HashMap, the corresponding response is returned. If none of the input
  * words is recognized, one of the default responses is randomly chosen.
  * 
- * @author David J. Barnes and Michael Kölling.
- * @version 2016.02.29
+ * @author Edward Galindez
+ * @version 04/25/2022
  */
 public class Responder
 {
@@ -90,7 +90,7 @@ public class Responder
                     lines += ("\n" + response); // add to lines
                     response = reader.readLine(); //check next line
                 }
-                else
+                else // when the next blank line is reached
                 {
                     for(String key : keys)
                     {
